@@ -3,9 +3,8 @@ var cheerio = require('cheerio');
 var content = fs.readFileSync('data/request7.txt');
 var $ = cheerio.load(content);
 
-
+//helper to remove trailing and leading spaces
 function cleanText(input){
-    
     input = input.replace(/(\r\n|\n|\r)/gm, ""); //remove line breaks, copied from https://stackoverflow.com/questions/10805125/how-to-remove-all-line-breaks-from-a-string
     input = input.replace(/\s+/g,' ').trim(); //remove extra spaces, copied from https://stackoverflow.com/questions/16974664/how-to-remove-the-extra-spaces-in-a-string
     //location names are repeated and separated by dash. take just the first half before dash to clean it up.
@@ -29,7 +28,7 @@ function traverseSiblings(element, iterations){
 
 let meetingObjects = [];
 
-//first, parse rows
+//first, parse rows to get each column, then call separate function to get values from column.
 async function parseRow(elem){
     let countCleanRows = 0;
     elem.each(function(i, row) {
@@ -44,7 +43,7 @@ async function parseRow(elem){
     });
     return meetingObjects;
 }
-
+//parses the 'address' column and adds to array
 function parseColumnAddress(c, rowNum){
     let buildingName = cleanText($('h4', c).text());
     let groupNode = $('b', c);
@@ -68,6 +67,3 @@ async function writeOutput(){
 }
 
 writeOutput();
-
-
-
