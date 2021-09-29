@@ -62,7 +62,8 @@ function parseColumnAddress(c, rowNum){
 
 async function writeOutput(){
     let output =  await parseRow($('tbody tr'));
-    console.log(output)
+
+    console.log(output.length)
     fs.writeFileSync('./output/parsedAALocations.json', JSON.stringify(output));
 }
 

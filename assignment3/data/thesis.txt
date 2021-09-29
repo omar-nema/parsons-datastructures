@@ -3839,12 +3839,21 @@ table thead th {
  <a href="http://www.nyintergroup.org">Home Page</a>   | <a href="http://www.nyintergroup.org/donationform_seventhtradition.pdf">Donation Form / Seventh Tradition</a> | <a href="/contact.cfm">Contact Us</a>
 <br />
 </center>
+<<<<<<< HEAD
 <br></td>
           </tr>
         </table>
         <!--end middle table --></td>
     </tr>
   </table>
+=======
+<br></td>
+          </tr>
+        </table>
+        <!--end middle table --></td>
+    </tr>
+  </table>
+>>>>>>> 9d69f6fc9548e9dc0628d8bf8d1c86924c0e6c85
   <p align="center">&nbsp;</p>
 <hr /><center>
 <a href="http://www.nyintergroup.org/corrsvce.cfm">Corrections Service</a> | 
@@ -3857,7 +3866,13 @@ table thead th {
  <a href="http://www.nyintergroup.org">Home Page</a>   | <a href="http://www.nyintergroup.org/donationform_seventhtradition.pdf">Donation Form / Seventh Tradition</a> | <a href="/contact.cfm">Contact Us</a>
 <br />
 </center>
+<<<<<<< HEAD
 <br>
 </center>
 </body>
+=======
+<br>
+</center>
+</body>
+>>>>>>> 9d69f6fc9548e9dc0628d8bf8d1c86924c0e6c85
 </html>
