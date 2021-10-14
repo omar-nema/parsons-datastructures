@@ -1,0 +1,32 @@
+blogData = [
+  {
+    id: 'entry-101419',
+    test: 1,
+    steps: 9000,
+    dateAdded: '10-12-2021',
+    dateUpdated: '10-12-2021',
+    mood: 'sad',
+    journalInd: 0,
+    workoutType: 'basketball',
+  },
+  {
+    id: 'entry-101420',
+    test: 1,
+    steps: 1100,
+    dateAdded: '10-13-2021',
+    dateUpdated: '10-13-2021',
+    mood: 'happy',
+    journalInd: 0,
+    workoutType: null,
+  },
+  {
+    id: 'entry-101421',
+    test: 1,
+    steps: 3000,
+    dateAdded: '10-14-2021',
+    dateUpdated: '10-14-2021',
+    mood: 'focused',
+    journalInd: 0,
+    workoutType: 'yoga',
+  },
+];
