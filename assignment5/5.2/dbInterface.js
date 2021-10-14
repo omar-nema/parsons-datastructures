@@ -17,42 +17,11 @@ class DailyHabits {
   }
 }
 
-function getCurrentDateTime() {
-  let current = new Date();
-  let cDate =
-    current.getFullYear() +
-    '-' +
-    (current.getMonth() + 1) +
-    '-' +
-    current.getDate();
-  let cTime =
-    current.getHours() +
-    ':' +
-    current.getMinutes() +
-    ':' +
-    current.getSeconds();
-  return cDate + ' ' + cTime;
-}
-
-function getIdString() {
-  let current = new Date();
-  let cDate =
-    current.getFullYear() +
-    '-' +
-    (current.getMonth() + 1) +
-    '-' +
-    current.getDate();
-
-  return cDate + '';
-  console.log(cDate);
-}
-
 AWS.config.update({
   region: 'us-east-1',
   accessKeyId: process.env.DYNAMODB_ACCESS_KEY_ID,
   secretAccessKey: process.env.DYNAMODB_SECRET_ACCESS_KEY,
 });
-
 var dynamodb = new AWS.DynamoDB();
 let docClient = new AWS.DynamoDB.DocumentClient();
 
@@ -68,5 +37,3 @@ blogData.forEach((d) => {
     else console.log(data); // successful response
   });
 });
-
-// console.log('yeaboi?');
