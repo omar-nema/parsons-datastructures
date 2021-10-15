@@ -16,8 +16,7 @@ db_credentials.port = 5432;
 const client = new Client(db_credentials);
 client.connect();
 
-// Sample SQL statement to query meetings on Monday that start on or after 7:00pm:
-var thisQuery = 'SELECT * from aadata ';
+var thisQuery = "SELECT * from aaLocations where address ILIKE '%fifth ave%' ";
 
 client.query(thisQuery, (err, res) => {
   if (err) {
