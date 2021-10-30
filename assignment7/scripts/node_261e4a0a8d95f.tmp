@@ -1,0 +1,68 @@
+var async = require('async');
+let dbCreds = require('./dbCreds.js');
+const data = require('../output/parsedAA.json');
+
+let meetingTimes = [];
+
+//add ids, create meetings array
+data.forEach((d, i) => {
+  d.groupId = i;
+  d.meetings.forEach((z, j) => {
+    z.groupId = i;
+    meetingTimes.push(z);
+  });
+});
+
+meetingTimes.forEach((d, i) => (d.id = i));
+
+let client = dbCreds.client;
+client.connect();
+
+function writeMeetings() {}
+
+writeMeetings();
+
+//INSERT MEETING TIMES
+
+//   console.log(query);
+//   client.query(query, (err, res) => {
+//     console.log(err, res);
+//     client.end();
+//   });
+//   // setTimeout(callback, 1000);
+// });
+
+// async function querySelectAll(tableName) {
+//   let query = `select * from ${tableName}`;
+//   let queryRes = await client.query(query, (err, res) => {
+//     console.log(err, res.rows);
+//     client.end();
+//     return res;
+//   });
+//   //console.log(queryRes.rowCount);
+//   return queryRes;
+// }
+
+//dbCreds.client.connect();
+
+// async.eachSeries(addressesForDb, function(value, callback) {
+//     const client = new Client(db_credentials);
+//     client.connect();
+//     var thisQuery = "INSERT INTO aalocations VALUES (E'" + value.address + "', " + value.latLong.lat + ", " + value.latLong.lng + ");";
+//     client.query(thisQuery, (err, res) => {
+//         console.log(err, res);
+//         client.end();
+//     });
+//     setTimeout(callback, 1000);
+// });
+
+// async.eachSeries(addressesForDb, function(value, callback) {
+//     const client = new Client(db_credentials);
+//     client.connect();
+//     var thisQuery = "INSERT INTO aalocations VALUES (E'" + value.address + "', " + value.latLong.lat + ", " + value.latLong.lng + ");";
+//     client.query(thisQuery, (err, res) => {
+//         console.log(err, res);
+//         client.end();
+//     });
+//     setTimeout(callback, 1000);
+// });

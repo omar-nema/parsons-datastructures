@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 var async = require('async');
 
+console.log(process.env.AWSRDS_PW);
 // AWS RDS POSTGRESQL INSTANCE
 var db_credentials = new Object();
 db_credentials.user = 'omar';
