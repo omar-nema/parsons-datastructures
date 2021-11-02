@@ -103,4 +103,4 @@ async function writeGroups() {
 // writeMeetings();
 //deleteTableData('meetingTimes');
 // writeMeetings();
-// querySelectAll('meetingTimes');
+querySelectAll('meetingTimes');
