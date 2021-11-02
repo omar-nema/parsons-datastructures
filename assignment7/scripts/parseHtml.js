@@ -1,8 +1,22 @@
 var fs = require('fs');
 var cheerio = require('cheerio');
 const { start } = require('repl');
-var content = fs.readFileSync('data/request7.txt');
-var $ = cheerio.load(content);
+
+let $;
+let meetingObjects = [];
+
+let contentFiles = [
+  'request0.txt',
+  'request1.txt',
+  'request2.txt',
+  'request3.txt',
+  'request4.txt',
+  'request5.txt',
+  'request6.txt',
+  'request7.txt',
+  'request8.txt',
+  'request9.txt',
+];
 
 //helper to remove trailing and leading spaces
 function cleanText(input) {
@@ -27,19 +41,17 @@ function traverseSiblings(element, iterations) {
   return $(e);
 }
 
-let meetingObjects = [];
-
 //first, parse rows to get each column, then call separate function to get values from column.
-async function parseRow(elem) {
+async function parseRow(elem, zone) {
   let countCleanRows = 0;
-  elem.each(function (i, row) {
+  elem.each(async function (i, row) {
     let cols = $('td', row);
     //ignore rows with columns that are larger or smaller than 3 (3 column table has the info we need)
     if (cols.length == 3) {
-      meetingObjects.push({});
+      meetingObjects.push({ zone: zone + 1 });
       //for each row, take the first column and parse it
-      parseColumnAddress(cols[0], countCleanRows);
-      parseColumnHours(cols[1], countCleanRows);
+      parseColumnAddress(cols[0], meetingObjects.length - 1);
+      parseColumnHours(cols[1], meetingObjects.length - 1);
       countCleanRows++;
     }
   });
@@ -61,6 +73,7 @@ function parseColumnAddress(c, rowNum) {
   } else {
     accessibility = null;
   }
+
   //add meeting attributes as object properties
   meetingObjects[rowNum].buildingName = buildingName;
   meetingObjects[rowNum].groupName = groupName;
@@ -90,10 +103,17 @@ async function parseColumnHours(c, rowNum) {
         si = siSplit[siSplit.length - 1];
       }
 
+      let meetingTypeSplit = dSel.split(indicators[0]);
+      let meetingTypeCombined = meetingTypeSplit[meetingTypeSplit.length - 1];
+      let meetingType = cleanText(
+        meetingTypeCombined.split('Special Interest')[0]
+      );
+
       let meetingObject = {
         day: dayOfWeek,
         startTime: startTime,
         endTime: endTime,
+        meetingType: meetingType,
         specialInterest: si,
       };
       if (!meetingObjects[rowNum].meetings) {
@@ -107,15 +127,26 @@ async function parseColumnHours(c, rowNum) {
 
 module.exports = {
   parseWrapper: async function parseWrapper() {
-    let output = await parseRow($('tbody tr'));
-    return output;
+    await contentFiles.forEach(async (d, i) => {
+      let content = fs.readFileSync('../data/' + d);
+      $ = cheerio.load(content);
+      let output = await parseRow($('tbody tr'), i);
+      return output;
+    });
+    console.log('html parsed');
+    return meetingObjects;
   },
 };
 
-//for testing
 // async function parseWrapper() {
-//   let output = await parseRow($('tbody tr'));
-//   return output;
+//   await contentFiles.forEach(async (d, i) => {
+//     let content = fs.readFileSync('../data/' + d);
+//     $ = cheerio.load(content);
+//     let output = await parseRow($('tbody tr'), i);
+//     return output;
+//   });
+//   console.log(meetingObjects);
+//   return meetingObjects;
 // }
 
 // parseWrapper();

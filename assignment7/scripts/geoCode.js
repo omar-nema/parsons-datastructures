@@ -8,13 +8,23 @@ const fs = require('fs'),
   dotenv = require('dotenv');
 
 async function apiCallWrapper(d) {
-  //get zip and street from each address that we parsed in last assignment
+  //get zip and street from each address that we parsed in last assignment\
+
   let locationSplit = d.location.split(',');
   let street = locationSplit[0];
-  let zip =
-    locationSplit[locationSplit.length - 1].match(/\d{5}(-\d{4})?\b/g)[0];
+  let zipInd =
+    locationSplit[locationSplit.length - 1].match(/\d{5}(-\d{4})?\b/g);
+  let zip;
+  if (zipInd) {
+    zip = locationSplit[locationSplit.length - 1].match(/\d{5}(-\d{4})?\b/g)[0];
+  } else {
+    zip = null;
+  }
+
   //run API request to get lat long
   let latLong = await getLatLong(street, zip);
+
+  console.log(latLong, street, zip);
   //write to existing object!
   d['latitude'] = latLong.latitude;
   d['longitude'] = latLong.longitude;
@@ -31,7 +41,7 @@ async function apiCallWrapper(d) {
 
 // TAMU api key
 dotenv.config();
-const API_KEY = process.env.TAMU_KEY;
+const API_KEY = process.env.TAMU_KEY2;
 async function getLatLong(street, zipinput) {
   const API_URL =
     'https://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx';
@@ -47,6 +57,7 @@ async function getLatLong(street, zipinput) {
   try {
     const response = await got(apiRequest);
     let tamuGeo = JSON.parse(response.body);
+    console.log(tamuGeo);
     let latLong = {
       latitude: tamuGeo.OutputGeocodes[0].OutputGeocode.Latitude,
       longitude: tamuGeo.OutputGeocodes[0].OutputGeocode.Longitude,

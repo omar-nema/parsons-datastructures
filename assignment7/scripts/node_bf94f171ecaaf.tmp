@@ -81,6 +81,8 @@ async function writeMeetings() {
   });
 }
 
+// writeMeetings();
+
 //INSERT MEETING GROUPS
 async function writeGroups() {
   console.log(data[0]);
@@ -100,7 +102,7 @@ async function writeGroups() {
   return;
 }
 
-// writeMeetings();
+console.log(meetingTimes.length);
 //deleteTableData('meetingTimes');
 // writeMeetings();
 // querySelectAll('meetingTimes');
