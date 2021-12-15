@@ -1,0 +1,32 @@
+* {
+  font-family: 'Arial';
+}
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.table {
+  margin-top: 50px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0;
+}
+.col {
+  flex-basis: 33%;
+}
+.th {
+  font-weight: 700;
+}
+.rect-inner {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.circle-inner {
+  width: 13px;
+  height: 13px;
+  border-radius: 100%;
+}

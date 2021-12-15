@@ -83,7 +83,6 @@ async function writeMeetings() {
 
 //INSERT MEETING GROUPS
 async function writeGroups() {
-  console.log(data[0]);
   await async.each(data, async function (value, callback) {
     console.log('running');
     let query;
@@ -103,4 +102,9 @@ async function writeGroups() {
 // writeMeetings();
 //deleteTableData('meetingTimes');
 // writeMeetings();
-querySelectAll('meetingTimes');
+// querySelectAll('meetingTimes');
+
+// writeGroups();
+// deleteTableData('aaGroups');
+
+console.log(data[322], data[323]);

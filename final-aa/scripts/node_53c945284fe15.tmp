@@ -1,0 +1,39 @@
+var async = require('async');
+let dbCreds = require('./dbCreds.js');
+
+let meetingTimes = [];
+
+let client = dbCreds.client;
+client.connect();
+
+async function querySelectAll(tableName) {
+  let query = `select * from ${tableName}`;
+  //   return await client.query(query, (err, res) => {
+  //     client.end();
+  //     console.log(res.rows);
+  //     return res.rows;
+  //   });
+
+  let res = await client.query(query);
+  console.log(res);
+}
+
+// querySelectAll('meetingTimes');
+
+async function runIt() {
+  let g = await querySelectAll('aaGroups');
+  console.log(g, 'pre');
+}
+
+runIt();
+
+//groups is basically the location
+
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send({ data: 'yes', more: 'no' });
+});
+
+// app.listen(3000, () => console.log('Example app listening on port 3000!')); // Webserver is running on port 3000
